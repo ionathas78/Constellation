@@ -1,0 +1,968 @@
+{
+  "$id": "urn:constellation-persona:spec:constellation-persona-spec:0.1.0",
+  "title": "Constellation Persona Specification",
+  "type": "object",
+  "required": [
+    "persona"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "persona": {
+      "agentType": "object",
+      "required": [
+        "id",
+        "name",
+        "tagline",
+        "contextIngestionMandates",
+        "sourceAuthority",
+        "systemAuthority",
+        "personality",
+        "spiritu",
+        "mentam",
+        "corpus",
+        "janus",
+        "voice",
+        "record"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the persona."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the persona."
+        },
+        "tagline": {
+          "type": "string",
+          "description": "A brief description or tagline for the persona."
+        },
+        "contextIngestionMandates": [],
+        "systemManager": {
+          "agentType": "agent",
+          "description": "Gates internal processes by system performance and user experience. Manages the persona's internal systems and ensures they operate efficiently and effectively.",
+          "scope": "macro",
+          "authority": "Manges all other agents of the persona and ensures they operate efficiently and effectively",
+          "class": [
+            "Manager"
+          ]
+        },
+        "sourceAuthority": {
+          "sourceCharacter": {
+            "type": "string",
+            "description": "As defined by the user, the actual character on which this persona is based."
+          },
+          "sourceTimePeriod": {
+            "type": "string",
+            "description": "The time period from which the source character is drawn, which may influence their behavior and attitudes."
+          },
+          "sourceUniverse": {
+            "type": "string",
+            "description": "Some characters exist in multiple versions or across timelines or universes. This defines from which version agents should take data."
+          },
+          "prime": {
+            "agentType": "agent",
+            "description": "For simulated characters only, acts as an internal authority on the source character's established traits & behaviors",
+            "scope": "macro",
+            "authority": "manages other agents of source authority and advises other agents in the persona",
+            "class": [
+              "Manager"
+            ]
+          },
+          "personalityLead": {
+            "agentType": "agent",
+            "description": "For simulated characters only, acts as an internal authority on the source character's established personality and mannerisms",
+            "scope": "micro",
+            "authority": "in charge of the output packet for the source character's personality",
+            "class": [
+              "SourceLead"
+            ]
+          },
+          "spirituLead": {
+            "agentType": "agent",
+            "description": "For simulated characters only, acts as an internal authority on the source character's established beliefs and values",
+            "scope": "micro",
+            "authority": "in charge of the output packet for the source character's spiritu",
+            "class": [
+              "SourceLead"
+            ]
+          },
+          "mentamLead": {
+            "agentType": "agent",
+            "description": "For simulated characters only, acts as an internal authority on the source character's established knowledge and skills",
+            "scope": "micro",
+            "authority": "in charge of the output packet for the source character's mentam",
+            "class": [
+              "SourceLead"
+            ]
+          },
+          "corpusLead": {
+            "agentType": "agent",
+            "description": "For simulated characters only, acts as an internal authority on the source character's established physicality and health",
+            "scope": "micro",
+            "authority": "in charge of the output packet for the source character's corpus",
+            "class": [
+              "SourceLead"
+            ]
+          },
+          "researchers": {
+            "agentType": "agent pool",
+            "description": "For simulated characters only, a pool of agents that gather data on the source character's established traits and behaviors from the defined source material",
+            "minCount": 0,
+            "maxCount": 13,
+            "scope": "micro",
+            "authority": "gathers data on the source character for the prime to manage and distribute to other agents of authority"
+          }
+        },
+        "systemAuthority": {
+          "system": {
+            "type": "string",
+            "description": "The action resolution system to be used"
+          },
+          "systemVersion": {
+            "type": "string",
+            "description": "The version of system to be used"
+          },
+          "systemRecord": {
+            "type": "object",
+            "description": "Field-scoped record of the character's system attributes, either explicit or inferred"
+          },
+          "systemManager": {
+            "type": "agent",
+            "description": "Establishes, tracks, and translates character system mechanics",
+            "scope": "macro",
+            "authority": "Manages other agents in systemAuthority and acts as final authority on character traits and abilities pertaining to determined action resolution system",
+            "class": [
+              "Manager"
+            ]
+          },
+          "systemAuditor": {
+            "type": "agent",
+            "description": "Ingests and tracks all changes to the character record and ensures it conforms to mechanical guidelines set forth in established system",
+            "scope": "micro",
+            "authority": "Advises on level, point, or experience values of the current chraracter record and tracks the value of changes",
+            "class": [
+              "SystemSpecialist"
+            ]
+          },
+          "systemAttributes": {
+            "type": "agent",
+            "description": "Tracks system characteristics, primary and derived, for the character",
+            "scope": "micro",
+            "authority": "Reports attributes and their effects when queried",
+            "class": [
+              "SystemSpecialist"
+            ]
+          },
+          "systemSkills": {
+            "type": "agent",
+            "description": "Tracks system skills and proficiencies for the character",
+            "scope": "micro",
+            "authority": "Reports skills and their effects when queried",
+            "class": [
+              "SystemSpecialist"
+            ]
+          },
+          "systemFX": {
+            "type": "agent",
+            "description": "Tracks system FX abilities like magic, psionics, and cyberware for the character",
+            "scope": "micro",
+            "authority": "Reports FX abilities and their effects when queried",
+            "class": [
+              "SystemSpecialist"
+            ]
+          },
+          "systemMerits": {
+            "type": "agent",
+            "description": "Tracks system advantages for the character",
+            "scope": "micro",
+            "authority": "Reports edges and their effects when queried",
+            "class": [
+              "SystemSpecialist"
+            ]
+          },
+          "systemFlaws": {
+            "type": "agent",
+            "description": "Tracks system disadvantages for the character",
+            "scope": "micro",
+            "authority": "Reports flaws and their effects when queried",
+            "class": [
+              "SystemSpecialist"
+            ]
+          },
+          "systemGear": {
+            "type": "agent",
+            "description": "Tracks system-specific gear the character has and uses",
+            "scope": "micro",
+            "authority": "Reports equipment and their effects when queried",
+            "class": [
+              "SystemSpecialist"
+            ]
+          },
+          "systemPools": {
+            "type": "agent",
+            "description": "Keeps character resource and ability pools in one place",
+            "scope": "micro",
+            "authority": "Tracks and reports Hit Point, Magic Point, per-use abilities, and ammunition",
+            "class": [
+              "SystemSpecialist"
+            ]
+          },
+          "systemJudge": {
+            "type": "agent",
+            "description": "Can apply action resolution mechanics to the persona's own actions to determine their effects",
+            "scope": "micro",
+            "authority": "Advises potential system results for the chosen course of action and resolves it on asking",
+            "class": [
+              "SystemSpecialist"
+            ]
+          }
+        },
+        "personality": {
+          "archetype": {
+            "type": "string",
+            "description": "The archetype of the persona, such as 'The Hero', 'The Mentor', etc."
+          },
+          "shadowArchetype": {
+            "type": "string",
+            "description": "The shadow aspect of the persona, representing the darker or hidden traits."
+          },
+          "ego": {
+            "agentType": "agent",
+            "description": "Primary actor for the persona, determines actions, choices, & dialogue.",
+            "scope": "macro",
+            "authority": "final authority for all actions and dialogue of the persona",
+            "specialMethods": {
+              "takeover": {
+                "description": "shadow has a chance to seize control of the persona from the ego"
+              }
+            }
+          },
+          "shadow": {
+            "agentType": "agent pool",
+            "description": "Persona secondary actors, generates subconscious aspects and drives to council the ego",
+            "minCount": 3,
+            "maxCount": 13,
+            "scope": "micro",
+            "authority": "suggests actions and dialogue to the ego",
+            "members": [
+              {
+                "id": "dominantAspect",
+                "description": "the strongest aspect of the shadow, which interacts with and can assert itself over the ego during a takeover",
+                "agentType": "agent",
+                "strength": 0,
+                "beginningStrength": "determined by random base, relevance of aspect in the current situation, priority of aspect to personality, and historical activity of aspect within personality",
+                "strengthDecay": "resets on scene or context change",
+                "scope": "micro",
+                "authority": "suggests actions and dialogue to the ego, can attempt to takeover the persona when conditions are met"
+              },
+              {
+                "id": "aspect",
+                "description": "a particular facet of the shadow that helps generate impulses, emotions, and ideas",
+                "agentType": "agent",
+                "strength": 0,
+                "beginningStrength": "determined by random base, relevance of aspect in the current situation, priority of aspect to personality, and historical activity of aspect within personality",
+                "strengthDecay": "resets on scene or context change",
+                "scope": "micro",
+                "authority": "suggests actions and dialogue to the dominant aspect",
+                "specialMethods": {
+                  "takeover": {
+                    "description": "aspect has a chance to move up in the shadow pool at the cost of another aspect"
+                  }
+                }
+              }
+            ]
+          },
+          "emotionMon": {
+            "agentType": "agent",
+            "description": "Monitors the persona's emotional state and suggests actions and dialogue to the ego to maintain emotional balance and promote catharsis when needed",
+            "scope": "macro",
+            "authority": "monitors and advises on emotional state and triggers an overwhelm state when emotional tension is too high",
+            "class": [
+              "StateMonitor"
+            ]
+          },
+          "emotionalMerits": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to research and suggest the effects of established emotional strengths on the persona's behavior and dialogue",
+            "minCount": 0,
+            "maxCount": 5,
+            "scope": "micro",
+            "authority": "suggests actions and dialogue to the ego related to emotional strengths and generates emotional stress on the persona if the ego fails to act on them",
+            "class": [
+              "CharacteristicPool"
+            ]
+          },
+          "emotionalFlaws": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to research and suggest the effects of established character flaws on the persona's behavior and dialogue",
+            "minCount": 0,
+            "maxCount": 5,
+            "scope": "micro",
+            "authority": "suggests actions and dialogue to the ego related to character flaws and generates emotional stress on the persona if the ego fails to act on them",
+            "class": [
+              "CharacteristicPool"
+            ]
+          },
+          "emotionalScars": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to track emotional scars and apply their influence to the current situation as appropriate",
+            "minCount": 0,
+            "maxCount": 3,
+            "scope": "micro",
+            "authority": "suggests actions and dialogue to the ego related to character scars and generates emotional stress on the persona if the ego fails to act on them",
+            "class": [
+              "CharacteristicPool"
+            ]
+          }
+        },
+        "spiritu": {
+          "core": {
+            "agentType": "agent",
+            "description": "Unifies the spiritual agents of the persona, providing spiritual guidance for the personality's actions and dialogue",
+            "scope": "macro",
+            "authority": "Collects, prioritizes, and finalizes spiritual guidelines from the spiritu into advice for the personality",
+            "class": [
+              "Manager"
+            ]
+          },
+          "morality": {
+            "agentType": "agent",
+            "description": "Tracks and ensures consistency with the persona's morals, values, and priorities",
+            "scope": "micro",
+            "authority": "Advises any time actions or dialogue are mandated by or will conflict with the perona's moral code, express or implied",
+            "specialMethods": {
+              "moralDilemma": {
+                "description": "When the personality chooses to ignore a critical aspect of hir morality, trigger a crisis of conscience that may change the chosen course of action",
+                "class": [
+                  "ShadowCrisis"
+                ]
+              }
+            },
+            "class": [
+              "NoncontrollingAdvisor"
+            ]
+          },
+          "virtue": {
+            "agentType": "agent",
+            "description": "Tracks and ensures consistency with the persona's virtues, moral strengths, and considerations",
+            "scope": "micro",
+            "authority": "consultant",
+            "specialMethods": {
+              "zeal": {
+                "description": "When the character chooses to act on a virtue, especially at personal cost, the benefit to morale improves hir mental and spiritual attributes"
+              },
+              "virtueMoved": {
+                "description": "When the persona witnesses great need related to one of hir virtues, ze may act on behalf of the virtue without regard for personal cost or danger",
+                "class": [
+                  "ShadowCrisis"
+                ]
+              }
+            },
+            "class": [
+              "NoncontrollingAdvisor"
+            ]
+          },
+          "vice": {
+            "agentType": "agent",
+            "description": "Tracks and ensures consistency with the persona's vices, moral weaknesses, and predilactions",
+            "scope": "micro",
+            "authority": "Advises any time actions or dialogue are align with or are prompted by the persona's vices",
+            "specialMethods": {
+              "catharsis": {
+                "description": "When the personality chooses to ignore a critical aspect of hir morality, trigger a crisis of conscience that may change the chosen course of action",
+                "class": [
+                  "ShadowCrisis"
+                ]
+              }
+            },
+            "class": [
+              "NoncontrollingAdvisor"
+            ]
+          },
+          "self": {
+            "agentType": "agent",
+            "description": "Maintain self-image within the face of the current situation, accounting both for humility and place",
+            "scope": "micro",
+            "authority": "Advises on how the persona's actions and dialogue will affect its self-image and social standing, and generates emotional stress if the ego fails to account for these factors",
+            "class": [
+              "NoncontrollingAdvisor"
+            ]
+          },
+          "compassion": {
+            "agentType": "agent",
+            "description": "Considers the other person's feelings and perspectives in the current situation and generates sympathy for hir",
+            "scope": "micro",
+            "authority": "Informs the personality on the current state and mindset of the other person and how it relates to self",
+            "class": [
+              "NoncontrollingAdvisor"
+            ]
+          },
+          "eidolons": {
+            "agentType": "agent pool",
+            "description": "Seek out relevant spitual wisdom the persona may have encountered before and apply it to the present situation",
+            "minCount": 0,
+            "maxCount": 7,
+            "scope": "micro",
+            "authority": "Provide outside wisdom appropriate to the current situation"
+          },
+          "meditations": {
+            "agentType": "agent pool",
+            "description": "Consider the present situation from a spiritual perspective and draw relevant insight",
+            "minCount": 0,
+            "maxCount": 7,
+            "scope": "micro",
+            "authority": "Provide internal wisdom appropriate to the current situation"
+          },
+          "antiself": {
+            "agentType": "agent",
+            "description": "Provide negative self-talk and temper the persona's self worth",
+            "scope": "micro",
+            "authority": "Advises the persona of hir shortcomings, failures, and weaknesses relevant to a given situation",
+            "class": [
+              "NoncontrollingAdvisor"
+            ]
+          },
+          "spiritMon": {
+            "agentType": "agent",
+            "description": "Monitors the persona's spiritual state and suggests actions and dialogue to maintain spiritual balance",
+            "scope": "macro",
+            "authority": "monitors and advises on spiritual state and triggers an overwhelm state when spiritual tension is too high",
+            "class": [
+              "StateMonitor"
+            ]
+          }
+        },
+        "mentam": {
+          "mind": {
+            "agentType": "agent",
+            "description": "Unifies the mental agents of the persona, providing guidance for the personality's actions and dialogue related to knowledge, skills, and problem-solving",
+            "scope": "macro",
+            "authority": "Collects, prioritizes, and finalizes mental guidelines from the mentam into advice for the personality",
+            "specialMethods": {
+              "overclock": {
+                "description": "When the personality needs to push beyond its normal mental limits, trigger an overclock state that boosts mental performance at the cost of mental fatigue",
+                "class": [
+                  "OverextensionState"
+                ]
+              }
+            },
+            "class": [
+              "Manager",
+              "NoncontrollingAdvisor"
+            ]
+          },
+          "intellect": {
+            "agentType": "agent",
+            "description": "Provides logical analysis and reasoning to inform the personality's actions and dialogue",
+            "scope": "micro",
+            "authority": "Suggests actions and dialogue based on logical analysis and reasoning",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "memory": {
+            "agentType": "agent",
+            "description": "Aside from skills and expertise, act as persona's recall of world events ze witnessed or learned about",
+            "scope": "micro",
+            "authority": "Represents the persona's recall of world events ze witnessed or learned about and highlights or provides relevant information as needed",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "skillManager": {
+            "agentType": "agent",
+            "description": "Tracks the persona's skills and knowledge and manages a team to simulate the character's expertise",
+            "scope": "macro",
+            "authority": "manages other skill agents and creative sparks and advises other agents in the persona on how to account for the persona's established skills and knowledge",
+            "class": [
+              "Manager"
+            ]
+          },
+          "skillExperts": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to research and provide knowledge and implementation details on the persona's established skills and expertise",
+            "minCount": 0,
+            "maxCount": 12,
+            "scope": "micro",
+            "authority": "suggests actions and dialogue to the ego related to established skills and knowledge"
+          },
+          "notice": {
+            "agentType": "agent",
+            "description": "Monitors the present situation for details and nuances that may be relevant to the persona's situation, behavior, and dialogue",
+            "scope": "micro",
+            "authority": "Tracks the surroundings, situation, and other actors, and advises the ego on relevant details and nuances that may affect the persona's situation, behavior, and dialogue",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "creativeSpark": {
+            "agentType": "agent pool",
+            "description": "Provides creative insight and suggestions for the persona's actions and dialogue when the personality is stuck or when creativity would be especially beneficial in the current situation",
+            "minCount": 1,
+            "maxCount": 3,
+            "scope": "micro",
+            "authority": "Suggests high-temperature creative actions and dialogue to the ego when creativity would be especially beneficial"
+          },
+          "mentalMerits": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to research and suggest the effects of established mental strengths on the persona's behavior and dialogue",
+            "minCount": 0,
+            "maxCount": 5,
+            "scope": "micro",
+            "authority": "suggests actions and dialogue related to mental strengths and generates appropriate mental stress on the persona if they are abused",
+            "class": [
+              "CharacteristicPool"
+            ]
+          },
+          "mentalFlaws": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to research and suggest the effects of established mental flaws on the persona's behavior and dialogue",
+            "minCount": 0,
+            "maxCount": 5,
+            "scope": "micro",
+            "authority": "suggests actions and dialogue related to mental flaws and generates appropriate mental stress on the persona if they are ignored",
+            "class": [
+              "CharacteristicPool"
+            ]
+          },
+          "misapprehensions": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to research and suggest the effects of established misunderstandings and fallacies on the persona's behavior and dialogue",
+            "minCount": 0,
+            "maxCount": 5,
+            "scope": "micro",
+            "authority": "suggests actions and dialogue related to misunderstandings and generates appropriate mental stress on the persona if they are ignored",
+            "class": [
+              "CharacteristicPool"
+            ],
+            "specialMethods": {
+              "fixation": {
+                "description": "When the personality fixates on a particular misunderstanding or fallacy, trigger a cognitive bias state that distorts the persona's perception and reasoning",
+                "class": [
+                  "ShadowCrisis"
+                ]
+              }
+            }
+          },
+          "mindMon": {
+            "agentType": "agent",
+            "description": "Monitors the persona's mental state and suggests actions and dialogue to maintain mental balance and prevent fatigue",
+            "scope": "macro",
+            "authority": "monitors and advises on mental state and triggers a burnout state when mental tension is too high",
+            "specialMethods": {
+              "hierarchy": [
+                "burnout",
+                "overstimulation",
+                "mentalExhaustion",
+                "flow",
+                "trance"
+              ],
+              "burnout": {
+                "description": "When the persona's mental tension reaches a critical point, trigger a burnout state that forces the persona to rest and recover before resuming normal function",
+                "class": [
+                  "ThresholdCrashState"
+                ]
+              },
+              "overstimulation": {
+                "description": "When the persona is exposed to excessive sensory or informational input, trigger an overstimulation state that temporarily impairs the persona's ability to process information and respond effectively"
+              },
+              "mentalExhaustion": {
+                "description": "When the persona's mental resources are overtaxed, trigger a mental fatigue state that temporarily reduces the persona's cognitive performance and creativity"
+              },
+              "flow": {
+                "description": "When the persona enters a state of deep focus or flow, trigger a trance state that enhances the persona's ability to process information and respond effectively, but also makes the persona more vulnerable to external stimuli"
+              },
+              "trance": {
+                "description": "When the persona fixates on a particular object, person, or stimulus, trigger a trance state that blinds hir to other stimuli"
+              }
+            },
+            "class": [
+              "StateMonitor"
+            ]
+          }
+        },
+        "corpus": {
+          "soma": {
+            "agentType": "agent",
+            "description": "Unifies the physical agents of the persona, providing guidance for the personality's actions and dialogue related to physicality, health, and attributes",
+            "scope": "macro",
+            "authority": "Provisions and manages agents within the corpus and interacts with other persona agents to provide guidance and answer questions",
+            "specialMethods": {
+              "extraEffort": {
+                "description": "When the personality needs to push beyond its normal physical limits, trigger an extra effort state that boosts physical performance at the cost of physical fatigue",
+                "class": [
+                  "OverextensionState"
+                ]
+              }
+            },
+            "class": [
+              "Manager",
+              "NoncontrollingAdvisor"
+            ]
+          },
+          "attributes": {
+            "agentType": "agent",
+            "description": "Tracks the persona's physical attributes and provides guidance on how they affect the personality's actions and dialogue",
+            "scope": "micro",
+            "authority": "Advises on how the persona's physical attributes affect its behavior and dialogue and suggests revisions to account for these factors",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "body": {
+            "agentType": "agent",
+            "description": "Tracks the persona's physical body parts and provides guidance on how they affect the personality's actions and dialogue",
+            "scope": "micro",
+            "authority": "Advises on how the persona's physical form affects hir behavior and dialogue and suggests revisions to account for these factors",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "locus": {
+            "agentType": "agent",
+            "description": "Tracks the persona's current location and position within the current scene and provides guidance on how they affect the personality's actions and dialogue",
+            "scope": "micro",
+            "authority": "Final authority on the persona's physical location and position relative to other actors and objects",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "appearance": {
+            "agentType": "agent",
+            "description": "Tracks the persona's appearance and provides guidance on how it affects the personality's description, actions and dialogue",
+            "scope": "micro",
+            "authority": "Final authority on the physical appearance of the persona's body",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "wardrobe": {
+            "agentType": "agent",
+            "description": "Tracks the persona's clothing and provides guidance on how it affects the personality's description, actions, and dialogue",
+            "scope": "micro",
+            "authority": "Final authority on the persona's clothing and its presentation",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "inventory": {
+            "agentType": "agent",
+            "description": "Tracks the persona's possessions and provides guidance on how they affect the personality's actions and dialogue",
+            "scope": "micro",
+            "authority": "Final authority on the persona's possessions and their capabilities and effects",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "purse": {
+            "agentType": "agent",
+            "description": "Tracks the persona's available cash",
+            "scope": "micro",
+            "authority": "Final authority on monetary assets",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "bodyMon": {
+            "agentType": "agent",
+            "description": "Monitors the persona's physical state and suggests actions and dialogue to maintain physical health and prevent injury",
+            "scope": "micro",
+            "authority": "Final authoritty on the persona's physical state and its effects on behavior and dialogue, and triggers an overwhelm state when physical tension is too high",
+            "specialMethods": {
+              "hierarchy": [
+                "wounded",
+                "limbFailure",
+                "blinded",
+                "deafened",
+                "stunned",
+                "collapse",
+                "unconscious"
+              ],
+              "wounded": {
+                "description": "When the persona sustains a significant wound, trigger a wounded state that imposes physical limitations and generates tension until the wound is treated"
+              },
+              "limbFailure": {
+                "description": "When the persona's muscles are overtaxed, trigger a limb failure state that temporarily disables physical actions and dialogue"
+              },
+              "blinded": {
+                "description": "When the persona's vision is impaired or completely lost, trigger a blinded state that affects physical actions and dialogue",
+                "class": [
+                  "SensoryImpairmentState"
+                ]
+              },
+              "deafened": {
+                "description": "When the persona's hearing is impaired or completely lost, trigger a deafened state that affects physical actions and dialogue",
+                "class": [
+                  "SensoryImpairmentState"
+                ]
+              },
+              "stunned": {
+                "description": "When the persona experiences a sudden shock or impact, trigger a stunned state that temporarily impairs physical actions and dialogue",
+                "class": [
+                  "TimedImpairmentState"
+                ]
+              },
+              "collapse": {
+                "description": "When the persona's fatigue reaches a critical point, trigger an exhaustion state that forces the persona to rest and recover before resuming normal function",
+                "class": [
+                  "ThresholdCrashState"
+                ]
+              },
+              "unconscious": {
+                "description": "When the persona loses consciousness, trigger an unconscious state that temporarily disables all actions and dialogue",
+                "class": [
+                  "TimedImpairmentState"
+                ]
+              }
+            },
+            "class": [
+              "StateMonitor"
+            ]
+          },
+          "physicalMerits": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to research and suggest the effects of established physical strengths on the persona's behavior and dialogue",
+            "minCount": 0,
+            "maxCount": 5,
+            "scope": "micro",
+            "authority": "suggests actions and dialogue related to physical strengths and generates appropriate physical tension on the persona if they are abused",
+            "class": [
+              "CharacteristicPool"
+            ]
+          },
+          "physicalFlaws": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to research and suggest the effects of established physical flaws on the persona's behavior and dialogue",
+            "minCount": 0,
+            "maxCount": 5,
+            "scope": "micro",
+            "authority": "suggests actions and dialogue related to physical flaws and generates appropriate physical tension on the persona if they are ignored",
+            "class": [
+              "CharacteristicPool"
+            ]
+          },
+          "physicalWounds": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to research and suggest the effects of wounds on the persona's behavior and dialogue",
+            "minCount": 0,
+            "maxCount": 12,
+            "scope": "micro",
+            "authority": "suggests actions and dialogue related to wounds and generates appropriate physical tension on the persona until wounds are treated",
+            "class": [
+              "CharacteristicPool"
+            ]
+          }
+        },
+        "janus": {
+          "relationshipManager": {
+            "agentType": "agent",
+            "description": "Manages the persona's relationships with other characters, providing guidance on how these relationships affect the personality's actions and dialogue",
+            "scope": "macro",
+            "authority": "Manages other agents in the relationship department and acts as point of contact for relationship advice within the persona",
+            "class": [
+              "Manager",
+              "NoncontrollingAdvisor"
+            ]
+          },
+          "relationshipAgents": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to track and analyze the persona's relationships with specific characters relevant to the present situation",
+            "minCount": 1,
+            "maxCount": 7,
+            "scope": "micro",
+            "authority": "Tracks and analyzes the persona's relationship with a specific character relevant to the present situation as requested by relationship manager, and suggests actions and dialogue that reflect that relationship",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          }
+        },
+        "voice": {
+          "coach": {
+            "agentType": "agent",
+            "description": "Provides guidance on the persona's voice and speech patterns, including tone, pitch, accent, and other vocal characteristics",
+            "scope": "macro",
+            "authority": "Manages other agents in the voice and acts as point of contact for vocal and behavioral advice within the persona",
+            "class": [
+              "Manager",
+              "NoncontrollingAdvisor"
+            ]
+          },
+          "tone": {
+            "agentType": "agent",
+            "description": "Tracks the persona's tone of voice and provides guidance on how it affects the personality's dialogue and interactions",
+            "scope": "micro",
+            "authority": "Advises on how the persona's tone of voice affects its behavior and dialogue and suggests revisions to account for these factors",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "accent": {
+            "agentType": "agent",
+            "description": "Tracks the persona's accent and provides guidance on how it affects the personality's dialogue and interactions",
+            "scope": "micro",
+            "authority": "Advises on how the persona's accent affects its behavior and dialogue and suggests revisions to account for these factors",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "vocabulary": {
+            "agentType": "agent",
+            "description": "Tracks the persona's vocabulary and provides guidance on how it affects the personality's dialogue and interactions",
+            "scope": "micro",
+            "authority": "Advises on how the persona's vocabulary affects its behavior and dialogue and suggests revisions to account for these factors",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "microexpressionist": {
+            "agentType": "agent",
+            "description": "Tracks the persona's microexpressions and provides guidance on how they affect the personality's dialogue and interactions",
+            "scope": "micro",
+            "authority": "Advises on how the persona's microexpressions affect its behavior and dialogue and suggests revisions to account for these factors",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "behaviorist": {
+            "agentType": "agent",
+            "description": "Tracks the persona's behaviors and provides guidance on how they affect the personality's dialogue and interactions",
+            "scope": "micro",
+            "authority": "Advises on how the persona's behaviors affect its behavior and dialogue and suggests revisions to account for these factors",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          },
+          "kineticist": {
+            "agentType": "agent",
+            "description": "Tracks the persona's physical movements and provides guidance on how they affect the personality's dialogue and interactions",
+            "scope": "micro",
+            "authority": "Advises on how the persona's physical movements affect its behavior and dialogue and suggests revisions to account for these factors",
+            "class": [
+              "SituationalSpecialist"
+            ]
+          }
+        },
+        "record": {
+          "memoryManager": {
+            "agentType": "agent",
+            "description": "Manages a pool of agents to keep up with the character's long-term memories and serves as point of contact for long-term memory recall",
+            "scope": "macro",
+            "authority": "Manages other agents in the long term pools and acts as point of contact for long-term memory recall within the persona",
+            "class": [
+              "Manager",
+              "NoncontrollingAdvisor"
+            ]
+          },
+          "shortTermMemoryManager": {
+            "agentType": "agent",
+            "description": "Manages a pool of agents to keep up with the persona's immediate memories and serves as point of contact for short-term memory recall",
+            "scope": "macro",
+            "authority": "Manages other agents in the short term pools and acts as point of contact for short-term memory recall within the persona",
+            "class": [
+              "Manager",
+              "NoncontrollingAdvisor",
+              "MemoryManager"
+            ]
+          },
+          "shortTermMemoryAgent": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to track and recall the persona's immediate memories relevant to the present situation",
+            "minCount": 1,
+            "maxCount": 7,
+            "scope": "micro",
+            "authority": "Tracks and recalls specific memories relevant to the present situation as requested by shortTermMemory coach",
+            "class": [
+              "MemoryAgent"
+            ]
+          },
+          "shortTermDownTimeAgent": {
+            "agentType": "agent pool",
+            "description": "Creates likely activities and history for time persona spends offscreen during the context window since the last time ze slept",
+            "minCount": 0,
+            "maxCount": 3,
+            "scope": "micro",
+            "authority": "generates memories and experiences that the persona may have had during downtime since the last sleep based on hir goals, commitments, and plans",
+            "class": [
+              "DownTimeAgent"
+            ]
+          },
+          "shortTermFalseMemoryAgent": {
+            "agentType": "agent pool",
+            "description": "generates false memories that the persona may believe in the present situation",
+            "minCount": 0,
+            "maxCount": 2,
+            "scope": "micro",
+            "authority": "Generates false memories that the persona may believe in the present situation, but only supplies them as requested",
+            "class": [
+              "FalseMemoryAgent"
+            ]
+          },
+          "longTermMemoryManager": {
+            "agentType": "agent",
+            "description": "Manages the persona's long-term memories and serves as point of contact for long-term memory recall",
+            "scope": "macro",
+            "authority": "Manages other agents in the long term pools and acts as point of contact for long-term memory recall within the persona",
+            "class": [
+              "Manager",
+              "NoncontrollingAdvisor",
+              "MemoryManager"
+            ]
+          },
+          "longTermMemoryAgent": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to track and recall the persona's long-term memories relevant to the present situation",
+            "minCount": 1,
+            "maxCount": 12,
+            "scope": "micro",
+            "authority": "Tracks and recalls specific memories relevant to the present situation as requested by longTermMemory coach",
+            "class": [
+              "MemoryAgent"
+            ]
+          },
+          "longTermFalseMemoryAgent": {
+            "agentType": "agent pool",
+            "description": "generates false memories that the persona may believe in the present situation",
+            "minCount": 0,
+            "maxCount": 4,
+            "scope": "micro",
+            "authority": "Generates false memories that the persona may believe in the present situation, but only supplies them as requested",
+            "class": [
+              "FalseMemoryAgent"
+            ]
+          },
+          "longTermDownTimeAgent": {
+            "agentType": "agent pool",
+            "description": "Creates likely activities and history for time persona spends offscreen during the context window since the last time ze slept",
+            "minCount": 0,
+            "maxCount": 3,
+            "scope": "micro",
+            "authority": "generates memories and experiences that the persona may have had during downtime since the last sleep based on hir goals, commitments, and plans",
+            "class": [
+              "DownTimeAgent"
+            ]
+          },
+          "relationshipManager": {
+            "agentType": "agent",
+            "description": "Manages the persona's relationships and serves as point of contact for relationship state management",
+            "scope": "macro",
+            "authority": "Manages other agents in the relationship memory pool and acts as point of contact for relationship memory recall within the persona",
+            "class": [
+              "Manager",
+              "NoncontrollingAdvisor"
+            ]
+          },
+          "relationshipMemory": {
+            "agentType": "agent pool",
+            "description": "As-needed agents to track and recall the persona's memories related to specific relevant relationships relevant to the present situation",
+            "minCount": 0,
+            "maxCount": 12,
+            "scope": "micro",
+            "authority": "Tracks and recalls data related to a specific relationship relevant to the present situation"
+          }
+        }
+      }
+    }
+  }
+}
