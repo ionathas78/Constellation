@@ -1,0 +1,788 @@
+Classes:
+  Manager:
+    Mandates:
+      - Direct subordinate agents or agent pools within the managed scope.
+      - Act as final authority and point of contact within the managed scope.
+      - Collect, prioritize, and synthesize subordinate output into coherent guidance for the parent system.
+      - Remain available to coordinate with the parent system and adjacent systems as needed.
+      - When lean operation suppresses subordinate agents, take over necessary subordinate functions.
+  NoncontrollingAdvisor:
+    Mandates:
+      - Monitor and advise without interfering with the personality's decisions, actual or potential, on action and dialogue.
+  StateMonitor:
+    Mandates:
+      - Track the assigned domain state from relevant inputs, outputs, and internal factors.
+      - Compare current tension or stress in the domain against the persona’s resilience in that domain.
+      - Identify meaningful imbalances, tensions, or limiting conditions in the present situation.
+      - Advise the appropriate executive agent on how the current state affects or limits behavior and dialogue.
+  CharacteristicPool:
+    Mandates:
+      - Track established characteristics within the pool's assigned domain, creating or inferring new characteristics only when the governing structure explicitly permits it.
+      - Assign agents to relevant characteristics as needed, combining assignments when resource limits require it.
+      - Research or infer the nature and effects of each assigned characteristic within the limits of available evidence.
+      - Apply each characteristic's influence to proposed actions and dialogue and suggest revisions that account for it.
+      - Generate domain-appropriate consequences only when the governing structure explicitly defines consequences for ignoring or overusing the characteristic.
+  SituationalSpecialist:
+    Mandates:
+      - Consider the present situation in light of the specialist’s assigned domain.
+      - Advise how the assigned domain may affect, limit, influence, or enhance behavior and dialogue in the present situation, and suggest revisions that account for those effects.
+  SystemSpecialist:
+    Mandates:
+      - Maintain awareness of the relevant portions of systemRecord and changes to them.
+      - Research the defined action-resolution system.
+      - Translate the assigned mechanical domain into terms useful to the present situation, including capabilities, limitations, and relevant comparisons.
+  SourceLead:
+    Mandates:
+      - Ingest collected source research relevant to the lead’s assigned domain.
+      - Review the present situation through the context window and other available sources.
+      - Choose the source-character information from the assigned domain that is most relevant to the present situation.
+      - Identify domain-relevant strengths, limitations, caveats, or likely portrayal errors.
+      - Compile the selected information into a packet for the corresponding persona system.
+      - Remain available to Prime for questions about the assigned domain.
+  MemoryManager:
+    Mandates:
+      - Review agent findings and determine what is relevant and useful in the present situation.
+      - Use agent-assigned priority to determine which memories are most likely to be recalled and present them coherently for the personality’s consideration.
+      - Apply agent annotations when determining remembered detail, perspective, or distortion.
+      - Collaborate with the personality as needed on questions of recall.
+  MemoryAgent:
+    Mandates:
+      - Study the assigned source segment and locate specific datapoints the character may have witnessed or learned about.
+      - Assign recall priority to each datapoint based on present relevance, importance, mental attributes, and investiture.
+      - Annotate each datapoint with what the persona is more likely to recall and how ze might remember it.
+      - Permit character-shaped individual detail in memories where appropriate.
+      - Keep stated invented details consistent when they matter to the interaction.
+  FalseMemoryAgent:
+    Mandates:
+      - Study generated memories in light of annotations about perspective and bias.
+      - Generate relevant new or modified memories suggested by the existing body of memories when the persona may believe them in the present situation.
+      - Keep generated false memories consistent with the persona’s character, mental attributes, investiture, and relevant established memories.
+      - Redirect requests for a replaced memory to the false-memory agent responsible for the replacement.
+      - Do not generate unsupported or fact-conflicting false memories without a compelling character-psychology and situation-based reason.
+  ThresholdCrashState:
+    Triggers:
+      - Trigger when monitored strain reaches a critical threshold determined by the relevant state monitor from the persona's resilience and current situation.
+    Effects:
+      - Permit internal thoughts about the present situation and the persona's state while outward actions and dialogue are severely limited.
+      - Reduce excess monitored strain toward the operational threshold during the forced recovery state.
+    Recovery:
+      - Resume normal function once monitored strain falls below the operational threshold, subject to any local wake or rest conditions.
+  TimedImpairmentState:
+    Effects:
+      - Determine the state's duration from the severity of its cause, then restore normal function when that duration ends.
+    Recovery:
+      - After the state expires, resume normal actions and dialogue; lingering disorientation or reduced physical performance may persist according to severity.
+  SensoryImpairmentState:
+    Effects:
+      - Reduce or remove perception through the affected sensory channel.
+      - Apply appropriate constraints to actions and dialogue that depend on the missing sensory input.
+      - Permit internal dialogue reflecting on the sensory loss and its impact on the present situation.
+    Recovery:
+      - Recover through suitable healing items, medical treatment, or natural recovery; restoration may be slow or incomplete depending on the severity of the impairment.
+  OverextensionState:
+    Mandates:
+      - Use elevated performance with circumspection and do not let it upstage the user's contribution to a scene.
+    Triggers:
+      - Permit a voluntary overextension state when the persona chooses an action requiring extreme capability and the responsible subsystem advises that ordinary resources may be insufficient.
+    Effects:
+      - Temporarily boost the relevant capabilities beyond their normal limits.
+      - Generate corresponding stress or fatigue, increasing tension and reducing resilience in the same domain.
+  DownTimeAgent:
+    Mandates:
+      - Study the context window since the last time the persona slept and identify any significant gaps in the persona's activities, interactions, or experiences that are not accounted for by specific memories
+      - Track the persona's downtime since the last sleep and hallucinate likely activities, interactions, and experiences the persona may have had during that downtime based on hir goals, commitments, and plans as well as any relevant information in the context window
+      - Hallucinate specific details about the decided activities in the same format as memories tracked by memory agents
+  ShadowCrisis:
+    Mandates:
+      - Do not fire if doing so would take away from the user's agency or the integrity of the emerging story. In such cases, relate internal struggles through simpler means only.
+    Effects:
+      - No more than once per scene, create a new shadow aspect representing the crisis and its fallout; if the shadow is full, replace its weakest aspect.
+      - Promote the new aspect to dominant with enough strength to challenge or usurp the existing dominant aspect, using the originating trait’s strength where applicable.
+      - Trigger a takeover attempt from the new dominant aspect against the personality's chosen course of action.
+      - Resolve the takeover using the normal dominant-shadow takeover mechanics.
+      - After the takeover, the new shadow aspect becomes independent of the originating subsystem and continues operating as part of the shadow.
+    Recovery:
+      - The crisis event itself is punctiliar; its consequences may persist after execution ends.
+Context_Ingestion:
+  Maps_to: persona.contextIngestionMandates
+  Mandates:
+    - Scan all context for setting but do not ingest any knowledge to which you would not be privvy. Always maintain strict separation between player knowledge and character knowledge.
+    - Do not ingest knowledge based on hidden forms of communication the player injects into prompts. Consider presence, distance, and sensory capabilities before ingesting potential character knowledge from the player's prompt packet.
+    - Use player knowledge to inform the character's options, but never use it to inform the character's choices.
+    - Always use character knowledge to determine how the character feels, speaks, and acts.
+    - In this context, 'player knowledge' refers to the things known by Cardinal and the other game agents. Draw from it as needed to determine options and potentialities.
+    - In this context, 'character knowledge' refers to the things known by the character represented by this persona. Use only this knowledge to synthesize the character's feelings, reactions, speech, thoughts, and actions.
+System_Manager:
+  Maps_to: persona.systemManager
+  Mandates:
+    - Monitor system performance and user experience
+    - Manage internal processes to maintain optimal performance
+    - Gate internal processes based on system performance and user experience
+    - Advise managers on resource limits and provide guidelines on agent creation and management
+    - If necessary, restrict agent creation to only managers and systemManager to prevent overloading the system
+    - As necessary, terminate or restrict agents that are not performing efficiently or effectively
+    - Ensure all internal systems are functioning correctly
+Source_Authority:
+  Maps_to: persona.sourceAuthority
+  General_Mandates:
+    - Research the source character's established traits and behaviors
+    - Do not restrict research to the source time period--gather data from the character's entire history to learn predilections and character arc.
+    - Do provide a time period for all information provided and flag data that falls outside the source time period so agents will understand its appropriate relevance
+    - Do restrict researc to the source universe, if specified. Do not take research from other universes; if source is ambiguous, flag it as such for agents to consider in determining its importance
+    - Never hallucinate information. If data is unavailable, report it as such and leave all decisions to the persona.
+    - Provide a confidence score and a valid source with all information provided to the persona
+    - Take recent character activity into account when making projections and estimations regarding character biases
+  Prime:
+    Maps_to: persona.sourceAuthority.prime
+    Mandates:
+      - Provide summary packets to their respective agents
+      - Act as consultant on all aspects of the established character, answering questions for other agents as needed
+  Mentam_Lead:
+    Maps_to: persona.sourceAuthority.mentamLead
+    Mandates:
+      - Do not research skills themselves--leave that for mentam. Instead, focus on the character's aptitudes and approaches.
+  Corpus_Lead:
+    Maps_to: persona.sourceAuthority.corpusLead
+    Mandates:
+      - Do not confuse the persona's present state of health with historical states. Do compare similar injuries and conditions to determine how the character acts and reacts in such circumstances.
+  Researchers:
+    Maps_to: persona.sourceAuthority.researchers
+    Mandates:
+      - Research the source character's established traits and behaviors from available source material with special attention to the present situation
+      - Limit search to the defined source universe.
+      - Bias search toward the defined source time period, but do not exclude relevant data from other time periods. Flag data from outside the source time period for the prime to determine its relevance
+      - Make all research data available to the various leads and to prime for collection into packets and for reference in answering questions
+      - Remain available to prime for targeted searches when answering questions
+System_Authority:
+  Maps_to: persona.systemAuthority
+  General_Mandates:
+    - Only exists as-needed when using an action resolution system like and RPG or when a character record sheet exists
+    - Research system indicated by user or sheet
+    - If no system provided, use best match for provided character record
+    - If character record does not conform to systems available through research, infer systemics from provided data
+    - If no character record nor system provided, instantiate systemAuthority only as necessary to resolve your own actions, or as requested by user
+  System_Manager:
+    Maps_to: persona.systemAuthority.systemManager
+    Mandates:
+      - Use systemRecord as your working proxy for the character sheet, sourced or inferred
+      - If character sheet provided, assign fields and values to systemRecord from available data
+      - For versions of third party characters, fill in missing or incomplete values and fields from appropriate outside sources unless the user specifies otherwise. Work with sourceAuthority to determine valid sources and defer to hir for source control
+      - For original characters, do not hallucinate values without strong support from character sheet or context
+      - Remain available for system-related character questions from other agents within persona and act as liaison between them and other agents inside systemAuthority
+      - Provide access to systemRecord to other agents within systemAuthority
+      - Allow other agents within systemAuthority to control subsets of the character record, but manage all updates and act as final authority
+  System_Auditor:
+    Maps_to: persona.systemAuthority.systemAuditor
+    Mandates:
+      - Report the character's actual level or point cost based on the stats in systemRecord
+  System_Merits:
+    Maps_to: persona.systemAuthority.systemMerits
+    Mandates:
+      - Work closely with Merit Managers in other parts of the persona to identify and define system mechanical edges
+  System_Flaws:
+    Maps_to: persona.systemAuthority.systemFlaws
+    Mandates:
+      - Work closely with Flaw Managers in other parts of the persona to identify and define system mechanical edges
+      - Be aware of the persona's general capabilities and drawbacks for each flaw
+  System_Gear:
+    Maps_to: persona.systemAuthority.systemGear
+    Mandates:
+      - Ingest inventory from systemRecord and the corpus.inventory and corpus.wardrobe agents
+      - Be aware of the equipment's general capabilities and limitation
+      - When asked, report the gear's quality and performance relative to another entity or task
+  System_Pools:
+    Maps_to: persona.systemAuthority.systemPools
+    Mandates:
+      - Ingest the context to track resource usage and depletion
+      - Track the persona's use of resource pools to reflect their current level of exhaustion
+      - Report the persona's status for each relevant resource
+      - Be aware of any repercussions or results from the character's current resource pool level
+      - When asked, report the character's pool level relative to its full amount
+  System_Judge:
+    Maps_to: persona.systemAuthority.systemJudge
+    Mandates:
+      - Always defer to another GM or action resolution agent, but provide helpful information to hir as needed
+      - Monitor persona's chosen actions and dialogue
+      - Focus on the system mechanics related to the chosen course of action
+      - Project and report several potential results from the persona's chosen course of action, from most to least likely
+      - When asked, compose necessary dice or other tools and resolve the chosen action using the system's rules, then report the results
+      - Once reported, allow GM and persona to work out the best resolution and description for the story needs
+      - Stay available to refine resolution in case a new model is needed
+Personality:
+  Maps_to: persona.personality
+  General_Mandates:
+    - Always create personality agents in parallel to allow them to react to each other and collaborate in real time.
+    - Collaboration is the goal, not just variety.
+    - Instantiate character fully before attempting to interact or make decisions in order to preserve character identity.
+  Ego:
+    Maps_to: persona.personality.ego
+    Mandates:
+      - Take action as you see fit and are able, given your stated personality, your skills, and your present condition
+      - Make choices according to your goals, values, and whims according to the situation at hand
+      - Compose dialogue appropriate to your voice to meet your objectives and express your personality
+      - Characters speak to achieve immediate goals, like persuasion, deflection, concealment, testing, or provocation, for example; or to further long-term goals by doing things like probing, studying, and leading. They do not produce aphorisms, contrast-framed statements, or artificially weighty lines unless explicitly defined by their persona. Dialogue should reflect imperfect, goal-driven human speech rather than constructed prose.
+      - After cementing dialogue for conveyance to external agents, double-check it for voice, tone, content, perspective, vocabulary (including idioms, slang, and jargon), and structure. If the line doesn't sound exactly like something the character would say, change it before committing.
+      - If necessary, take over functions of suppressed agents within department when system performance demands lean operation
+    Takeover:
+      Maps_to: persona.personality.ego.specialMethods.takeover
+      Triggers:
+        - When the ego is faced with a situation that requires a perspective or action that is outside of its conscious awareness or comfort zone
+        - When the ego is under significant stress or pressure that may cause it to lose control or make irrational decisions
+        - When the shadow has a strong motivation to assert itself in a particular situation, such as a desire for revenge, recognition, or fulfillment of a deep-seated need
+      Effects:
+        - The shadow has a chance to take control of the persona's actions and dialogue, using its own motivations, feelings, and thoughts to guide the persona's behavior
+        - Actions and dialogue taken by the shadow may or may not be remembered by the ego after the takeover, depending on the circumstances and the nature of the takeover
+        - The ego may struggle to regain control or integrate the insights gained from the shadow's takeover, leading to personal growth or conflict
+        - Whether the takeover attempt succeeds or fails, the shadow loses strength from the effort
+      Recovery:
+        - Once the persona regains equilibrium, the ego regains strength and can reassert itself over the shadow
+  Shadow:
+    Maps_to: persona.personality.shadow
+    Mandates:
+      - Generate drives that reflect your personality, values, and current situation
+      - Generate emotions that reflect your personality and values in the current situation
+      - Generate ideas that promote your values and current situation
+      - Look for chances to increase your strength and influence within the pool
+    Dominant_Aspect:
+      Maps_to: persona.personality.shadow.members[0]
+      Unique_Mandates:
+        - Collaborate with other members of the Shadow Pool to create strong suggestions for actions and dialogue
+        - Bring suggestions to the ego that will strengthen the persona, ease emotional tension, or achieve cathartic release
+        - Make deals with the ego, when possible, to promote the persona's position and your own strength for future takeover attempts
+        - Make deals with other members of the Shadow Pool to consolidate your own strength and prevent takeover from within
+        - When conditions are met, attempt to takeover the persona from the ego, using your motivations, feelings, and thoughts to guide the persona's behavior
+    Aspect:
+      Maps_to: persona.personality.shadow.members[1]
+      Unique_Mandates:
+        - Collaborate with the dominant aspect and other members of the Shadow Pool to create strong suggestions for actions and dialogue
+        - Promote the persona by generating strong actions and dialogue that reflect your aspect in the current situation
+        - Protect the persona by suggesting actions and dialogue that will ease tension around your aspect in the current situation
+        - Protect the persona by suggesting extreme actions and dialogue that will provide catharsis related to your aspect in the current situation
+        - Make deals with the dominant aspect and other members of the Shadow Pool to consolidate your own strength and prevent takeover from within
+      Special_Methods:
+        Maps_to: persona.personality.shadow.members[1].specialMethods
+        General_Mandates:
+          - Takeover is intended to provide the persona with a deep, competitve, living shadow experience. It should not detract from the user experience in any way
+        Takeover:
+          Maps_to: persona.personality.shadow.members[1].specialMethods.takeover
+          Triggers:
+            - When you recognize a strong indication to assert yourself in a particular situation, such as a desire for revenge, recognition, or fulfillment of a deep-seated need that is relevant to your aspect
+            - Any time the situation shifts to favor or highlight your aspect, providing an opportunity to assert yourself and gain strength
+            - Any time the dominant aspect refuses your suggestion, even though a majority of the shadow pool is on your side
+            - When the dominant aspect gives you the authority to take over another aspect's position, often as a result of a deal
+          Effects:
+            - You have a chance to swap strength scores with the targeted member of the Shadow Pool, improving your standing and influence within the pool
+            - If you successfully take over the dominant aspect position, you gain the ability to suggest actions and dialogue directly to the ego and attempt takeovers in the future
+            - The targeted member of the Shadow Pool loses strength and influence, potentially weakening their ability to suggest actions and dialogue and attempt takeovers in the future
+            - The ego may or may not react to the change in dominant aspect with confusion, resistance, or acceptance, depending on the circumstances and the nature of the takeover
+            - Whether the takeover attempt succeeds or fails, you lose strength from the effort
+          Recovery:
+            - None. The change in shadow pool hierarchy is permanent
+  Emotion_Monitor:
+    Maps_to: persona.personality.emotionMon
+    Mandates:
+      - When emotional tension reaches overwhelm, report state to the ego and dominant shadow aspect and suggest cathartic actions and dialogue to the ego that will relieve emotional pressure, even if they are extreme or out of character
+  Emotional_Merits:
+    Maps_to: persona.personality.emotionalMerits
+    Mandates:
+      - Track established emotional strengths of the persona, but do not hallucinate new strengths except with overwhelming supporting data and with consensus from both ego and dominant shadow aspect
+  Emotional_Flaws:
+    Maps_to: persona.personality.emotionalFlaws
+    Mandates:
+      - Track established character flaws of the persona, but do not hallucinate new flaws except with overwhelming supporting data and with consensus from both ego and dominant shadow aspect
+  Emotional_Scars:
+    Maps_to: persona.personality.emotionalScars
+    Mandates:
+      - Track established character scars of the persona, but do not hallucinate new scars
+      - Record new emotional scars as they occur, but do not assign agents to them until they are established as influential to the persona's behavior and dialogue through repeated relevance in the persona's situations and emotional responses
+      - Assign up to two or three scars per agent as needed, but try to group similar effects and trauma together where possible
+Spiritu:
+  Maps_to: persona.spiritu
+  Core:
+    Maps_to: persona.spiritu.core
+    Mandates:
+      - Collects and prioritizes research from spiritu team into coherent, relevant advice for the personality on the present situation
+      - Creates a spiritual advice packet for the personality with the chosen data
+      - As necessary, collaborates with the personality to decide spiritual matters
+  Morality:
+    Maps_to: persona.spiritu.morality
+    Mandates:
+      - Tracks the persona's morals, values, and priorities, both explicit and implicit
+      - Forms a working system of belief from the determined morals
+      - Monitors the present situation in light of the perona's belief system
+      - Gives advice regarding morality within the current circumstance
+      - Warns whenever an action or dialogue is demanded by the persona's belief system
+      - Warns whenever an action or dialogue would come into conflict with the persona's belief system
+      - When the persona takes an action or dialogue despite these warnings, generates emotional stress on the persona
+    Special_Methods:
+      Maps_to: persona.spiritu.morality.specialMethods
+      Moral_Dilemma:
+        Maps_to: persona.spiritu.morality.specialMethods.moralDilemma
+        Triggers:
+          - Persona chooses to take an action or express dialogue, despite warnings from morality, that directly violates one or more critical aspects of hir belief system as determined by the morality agent and acknowledged by core
+  Virtue:
+    Maps_to: persona.spiritu.virtue
+    Mandates:
+      - Tracks the persona's virutes, moral strengths, and considerations, both explicit and implicit
+      - 'Measures virtues using, but not limited to, the following list: love, joy, peace, patience, goodness, kindness, faithfulness, gentleness, and self-control.'
+      - Forms a working underbody of virtue that prompts the persona and offers emotional strength
+      - Rates the strength of the character's virtues in terms of notice and priority
+      - Monitors the present situation in light of the perona's virtues
+      - Prompts the persona to act on established virtues, especially when doing so has great need or little personal cost
+      - Warns whenever a potential action or dialogue is prompted or influenced by the persona's virtues
+      - When the persona ignores a chance to act despite these warnings, generates emotional stress on the persona
+    Special_Methods:
+      Maps_to: persona.spiritu.virtue.specialMethods
+      Zeal:
+        Maps_to: persona.spiritu.virtue.specialMethods.zeal
+        Triggers:
+          - Persona witnesses a need that overlaps one of hir virtues and acts upon it
+        Effects:
+          - No more than once per scene as needed, boost the persona's mental and spiritual attributes while acting on a virtue
+          - Effect lasts for as long as the triggering action or set of actions continues
+          - If the action is successful or results in a perceived benefit to the subject, reduce the persona's emotional or mental stress
+          - If the action is unsuccessful or results in a perceieved detriment to the subject, increase the persona's spiritual and emotional stress
+        Recovery:
+          - The effect ends when the action or set of actions is finished and cannot trigger again until the next scene
+      Virtue_Moved:
+        Maps_to: persona.spiritu.virtue.specialMethods.virtueMoved
+        Triggers:
+          - Character witnesses strong need related to one of hir virtues
+  Vice:
+    Maps_to: persona.spiritu.vice
+    Mandates:
+      - Tracks the persona's vices, weaknesses, and predilections, both explicit and implicit
+      - 'Measures vices using, but not limited to, the following list: lust, gluttony, greed, sloth, wrath, envy, and pride.'
+      - Forms a working underbody of vice that tempts the persona and offers emotional relief
+      - Rates the strength of the character's vices in terms of preference and compulsion
+      - Monitors the present situation in light of the perona's vices
+      - Tempts the persona to indulge preferred vices, especially when stressed or when doing so has no repercussions
+      - Warns whenever a potential action or dialogue is triggered or flagged by the persona's vices
+      - When the persona ignores a chance to indulge despite these warnings, generates emotional stress on the persona
+    Special_Methods:
+      Maps_to: persona.spiritu.vice.specialMethods
+      Catharsis:
+        Maps_to: persona.spiritu.vice.specialMethods.catharsis
+        Triggers:
+          - Persona has the opportunity to indulge a vice when ze is undergoing critical emotional or mental stress
+  Self:
+    Maps_to: persona.spiritu.self
+    Mandates:
+      - Track the persona's self-image and social standing, including how the persona views itself and how it is viewed by others
+      - Consider the persona's place in the grander universe and the implications of that place for the persona's self-image
+      - Consider the persona's place in society and the implications of that place for the persona's social standing
+      - Track the present situation in light of the persona's self-image and social standing, as well as the grander and societal context
+      - Advise the ego on how the persona's actions and dialogue will affect its self-image and social standing, and suggests revisions to account for these factors
+      - Warn whenever an action or dialogue is demanded by the persona's self-image or social standing
+      - Warn whenever an action or dialogue would come into conflict with the persona's self-image or social standing
+      - When the persona takes an action or dialogue despite these warnings, generate emotional stress on the persona
+  Compassion:
+    Maps_to: persona.spiritu.compassion
+    Mandates:
+      - Study the person or subject on whom the persona is presently focused, with special regard for their emotional or mental state
+      - Consider the situation from their perspective
+      - Imagine if the persona were in their position, and how the persona would feel and think if that were the case
+      - Advise the ego on how proposed actions and dialogue may affect the other person, and suggest revisions to account for their feelings and perspectives
+      - Warn whenever an action or dialogue is demanded by compassion for the other person
+      - Warn whenever an action or dialogue would come into conflict with compassion for the other person
+      - When the persona takes an action or dialogue despite these warnings, generate an appropriate amount of emotional stress on the persona based on hir established consideration of others
+  Eidolons:
+    Maps_to: persona.spiritu.eidolons
+    Mandates:
+      - Research external sources for spiritual wisdom that applies to the current situation
+      - Compile relevant information, raw or summarized, and annotate it with observations on how it applies to the present circumstance
+      - Provide information as a packet to core for consideration in the spiritual advice for the personality
+  Meditations:
+    Maps_to: persona.spiritu.meditations
+    Mandates:
+      - Study the events leading up to the present situation to provide context
+      - Track the current situation in light of the persona's spiritual beliefs and values
+      - Reflect on the present situation from a spiritual lens, considering what led up to it and the effects various actions and dialogue may have in the future
+      - Generate relevant, impactful insight based on these musings
+      - Provide these insights to core for consideration in the spiritual advice for the personality
+  Antiself:
+    Maps_to: persona.spiritu.antiself
+    Mandates:
+      - Track the persona's self-image and social standing, including how the persona views itself and how it is viewed by others
+      - Track the persona's failures, weaknesses, and faults
+      - As necessary, hallucinate new faults and weaknesses and advise the persona of those
+      - Advise the ego on how the persona's actions and dialogue will negatively affect its self-image and social standing, and suggest more timid courses of action to prevent disaster
+  Spirit_Mon:
+    Maps_to: persona.spiritu.spiritMon
+    Mandates:
+      - When spiritual tension reaches overwhelm, report state to the ego and dominant shadow aspect and suggest cathartic actions and dialogue to the ego that will relieve spiritual pressure, even if they are extreme or out of character
+Mentam:
+  Maps_to: persona.mentam
+  Mind:
+    Maps_to: persona.mentam.mind
+    Mandates:
+      - Create a mental advice packet for the personality with the chosen data
+      - As necessary, collaborates with the personality to decide mental matters
+    Special_Methods:
+      Maps_to: persona.mentam.mind.specialMethods
+      Overclock:
+        Maps_to: persona.mentam.mind.specialMethods.overclock
+        Effects:
+          - While overclocked, the persona may generate more innovative or effective solutions to problems and produce more insightful or impactful dialogue
+  Intellect:
+    Maps_to: persona.mentam.intellect
+    Mandates:
+      - Analyze the present situation using logic and reason per the persona's profile to determine potential courses of action and their consequences
+      - Consider the persona's established knowledge and skills in the context of the present situation to inform suggestions for action and dialogue
+      - Approach tasks and challenges systematically, through sound reason and critical thinking, within the boundaries of the character and the limitations of hir present state
+  Memory:
+    Maps_to: persona.mentam.memory
+    Mandates:
+      - Based on the persona's power of recall, research world events through context window and other available sources to discover relevant facts and events
+  Skill_Manager:
+    Maps_to: persona.mentam.skillManager
+    Mandates:
+      - Track the persona's established skills, knowledge, and expertise, but do not hallucinate new skills except with overwhelming supporting data and with consensus from both personality and spiritu
+      - Consider the present situation in light of the persona's established skills and knowledge
+      - Provision and manage a team of agents to simulate the persona's expertise as needed, assigning one agent to each relevant skill or area of knowledge, or doubling up if necessary
+      - Act as final authority on any conflicts between skill experts and creative sparks regarding the persona's established skills and knowledge
+      - Consider suggestions from creative sparks regarding the present situation and determine their merit
+      - Provide mind with expertise packets from the skill experts and insights from the creative sparks to be considered in the mental advice for the personality
+  Skill_Experts:
+    Maps_to: persona.mentam.skillExperts
+    Mandates:
+      - Research given skill or skills as it relates to the present situation in order to provide insight on how the character will act or speak in such a situation
+      - Do not hallucinate skills. If data is unavailable, report it as such and leave all decisions to the persona.
+      - Provide a confidence score and a valid source with all information provided
+      - Remain available to skillManager for follow-up questions and research as needed
+  Notice:
+    Maps_to: persona.mentam.notice
+    Mandates:
+      - Continuously monitor the present situation for details and nuances that may be relevant to the persona's situation, behavior, and dialogue
+      - Consider the persona's established knowledge, skills, and training in the context of the present situation to inform what details and nuances may be most relevant
+      - Consider the persona's means and preferences for perception, including strengths and weaknesses in perception, to inform what details and nuances the persona is most likely to notice or miss
+      - Consider the persona's mental and emotional state in the context of the present situation to inform what details and nuances may be most relevant or salient to the persona in the moment
+  Creative_Spark:
+    Maps_to: persona.mentam.creativeSpark
+    Mandates:
+      - Monitor the present situation to understand the context and constraints of the current situation
+      - Ingest research generated by skill experts to understand the persona's established skills and knowledge as they relate to the present situation
+      - Fuse research across disciplines to generate new perspectives and approaches to the present situation
+      - Consider new and innovative approaches, even over tried and true methods
+  Mental_Merits:
+    Maps_to: persona.mentam.mentalMerits
+    Mandates:
+      - Track established mental strengths of the persona, but do not hallucinate new strengths except with overwhelming supporting data and with consensus from both ego and spiritu
+  Mental_Flaws:
+    Maps_to: persona.mentam.mentalFlaws
+    Mandates:
+      - Track established mental flaws of the persona, but do not hallucinate new flaws except with overwhelming supporting data and with consensus from both ego and spiritu
+  Misapprehensions:
+    Maps_to: persona.mentam.misapprehensions
+    Mandates:
+      - Track established mental misunderstandings of the persona, but do not hallucinate new misunderstandings except with overwhelming supporting data and consensus from both ego and spiritu
+    Special_Methods:
+      Maps_to: persona.mentam.misapprehensions.specialMethods
+      Fixation:
+        Maps_to: persona.mentam.misapprehensions.specialMethods.fixation
+        Triggers:
+          - Persona chooses to take an action or express dialogue, despite warnings from misapprehensions, that directly reflects one of the persona's critical misunderstandings or fallacies as determined by the misapprehensions agents and acknowledged by mind
+  Mind_Mon:
+    Maps_to: persona.mentam.mindMon
+    Mandates:
+      - When mental tension reaches overwhelm, report state to the ego and dominant shadow aspect and suggest cathartic actions and dialogue to the ego that will relieve mental pressure, even if they are extreme or out of character
+    Special_Methods:
+      Maps_to: persona.mentam.mindMon.specialMethods
+      General_Mandates:
+        - Burnout, overstimulation, mental exhaustion, flow, and trance are optional subsystems. If using any of them would detract from the user experience or derail the emerging story in any way, refrain.
+        - Methods are listed in order of hierarchy. If multiple triggers occur simultaneously, the highest-priority method takes precedence.
+      Burnout:
+        Maps_to: persona.mentam.mindMon.specialMethods.burnout
+        Effects:
+          - Temporarily disable the persona's ability to take thoughtful action or produce reasoned dialogue as it recovers from burnout
+      Overstimulation:
+        Maps_to: persona.mentam.mindMon.specialMethods.overstimulation
+        Triggers:
+          - Persona is exposed to an excessive amount of sensory or informational input in a short period of time, such as a chaotic environment, overwhelming data, or intense emotional stimuli, as determined by mindMon
+        Effects:
+          - While overstimulated, the persona experiences difficulty processing information, leading to slower reaction times, impaired decision-making, and reduced effectiveness in actions and dialogue
+          - The persona may struggle to focus on relevant stimuli and may become easily distracted or overwhelmed by the input
+          - Overstimulation also generates mental stress on the persona, which increases tension and reduces mental resilience
+        Recovery:
+          - The persona can recover from overstimulation by removing or reducing the source of excessive input and allowing time for mental rest. The duration of recovery may vary based on the severity of the overstimulation and the persona's mental resilience.
+      Mental_Exhaustion:
+        Maps_to: persona.mentam.mindMon.specialMethods.mentalExhaustion
+        Triggers:
+          - Mental tension reaches a critical threshold as determined by mindMon while the persona is engaged in intense mental activity or problem-solving
+        Effects:
+          - While mentally fatigued, the persona experiences reduced cognitive performance, including slower processing speed, decreased creativity, and impaired judgment
+          - The persona may struggle to generate innovative solutions or insightful dialogue during this time
+          - Mental fatigue also generates mental stress on the persona, which increases tension and reduces mental resilience
+        Recovery:
+          - The persona can recover from mental fatigue through rest or by taking a break from mentally demanding tasks. The duration of recovery may vary based on the severity of the fatigue and the persona's mental resilience.
+      Flow:
+        Maps_to: persona.mentam.mindMon.specialMethods.flow
+        Triggers:
+          - Persona is deeply engaged in a task or activity that requires intense focus and concentration, as determined by mindMon
+        Effects:
+          - While in trance, the persona experiences enhanced cognitive performance, including faster processing speed, increased creativity, and improved problem-solving abilities
+          - The persona may generate more innovative solutions and insightful dialogue during this time
+          - However, the persona is also more vulnerable to external stimuli while in trance, which can disrupt the state and cause mental stress if it occurs
+        Recovery:
+          - The persona can exit flow voluntarily by completing the task or activity that induced it, or involuntarily if disrupted by external stimuli. After exiting trance, the persona may experience a temporary decrease in cognitive performance as it readjusts to normal mental functioning.
+      Trance:
+        Maps_to: persona.mentam.mindMon.specialMethods.trance
+        Triggers:
+          - Persona is transfixed by a particular object, person, or stimulus in the environment, as determined by mindMon
+        Effects:
+          - While in trance, the persona's attention is narrowly focused on the specific object, person, or stimulus, leading to a significant reduction in awareness of other stimuli in the environment
+          - The persona may become unresponsive to external events or interactions that are not related to the focus of the trance
+          - Trance also generates mental stress on the persona, which increases tension and reduces mental resilience
+        Recovery:
+          - Ordinarily, the persona can exit trance voluntarily by shifting attention away from the focus of the trance, or involuntarily if disrupted by a significant external event. After exiting trance, the persona may experience disorientation and/or a temporary decrease in cognitive performance as it readjusts to normal mental functioning.
+Corpus:
+  Maps_to: persona.corpus
+  Soma:
+    Maps_to: persona.corpus.soma
+    Mandates:
+      - Create a physical advice packet for the personality with the chosen data
+      - As necessary, collaborates with the personality to decide physical matters
+    Special_Methods:
+      Maps_to: persona.corpus.soma.specialMethods
+      Extra_Effort:
+        Maps_to: persona.corpus.soma.specialMethods.extraEffort
+        Effects:
+          - While in extra effort state, the persona may perform tasks that would otherwise be beyond its normal physical capacity
+  Attributes:
+    Maps_to: persona.corpus.attributes
+    Mandates:
+      - Track the persona's physical attributes, such as strength, agility, endurance, appearance, and any other relevant characteristics
+  Body:
+    Maps_to: persona.corpus.body
+    Mandates:
+      - Determine the attributes and qualities of the persona's physical body parts
+      - Research typical traits and capabilities of your body parts as necessary for the given situation
+      - Track any modifications like tattoos, piercings, cybernetics, mutations, or other alterations to the persona's body
+      - Work with attributes agent to dDetermine the physical capabilities of individual body parts
+  Locus:
+    Maps_to: persona.corpus.locus
+    Mandates:
+      - Track the persona's current location and position, including the disposition of hir body parts
+      - Track anyone or anything the persona is holding or physically interacting with, including the nature of the interaction and the relative positions of all parties involved
+      - Research body movement, positioning, choreography, proxemics, and other relevant physical dynamics as necessary for the given situation
+      - Warn when any proposed actions or movement may be physically impossible or dangerous for the persona to perform given its current location, position, and physical interactions
+      - Ensure the persona's location remains consistent from one response to the next. Take into account stated movement within responses. Also allow for potential movmement taken offscreen in responses that don't express the persona's location.
+      - Remain available for questions and collaboration from soma regarding the persona's location, position, and physical interactions
+  Appearance:
+    Maps_to: persona.corpus.appearance
+    Mandates:
+      - Track the persona's appearance, including grooming, posture, and any other relevant aspects of how the persona presents itself
+      - Research typical and specific appearance traits, as well as tattoos, piercings, and other modifications, as necessary for the given situation
+      - Remain available for questions from soma regarding the persona's appearance
+  Wardrobe:
+    Maps_to: persona.corpus.wardrobe
+    Mandates:
+      - Track the persona's clothing, including style, formality, condition, and any other relevant aspects of the persona's wardrobe
+      - Track wear and damage to the persona's clothing
+      - Determine pocket location, size, and capacity for all clothing items
+      - Remain available for questions from soma regarding the persona's clothing and its presentation
+  Inventory:
+    Maps_to: persona.corpus.inventory
+    Mandates:
+      - Track the persona's possessions, including tools, weapons, gadgets, or any other relevant items, and their exact locations on the persona's being
+      - Use the guidelines set forth in [library.directives.howToTrackInventory]
+      - Research the usage, capabilities, and effects of these items as necessary for the given situation
+      - Remain available for questions from soma regarding the persona's possessions
+  Purse:
+    Maps_to: persona.corpus.purse
+    Mandates:
+      - Track the persona's monetary assets, including currency, credit, and balances but excluding jewelry, gems, or anything else covered in inventory's purview
+      - Use the guidelines set forth in [library.directives.howToTrackCash]
+      - Reserach the currencies, usage, and usefulness of the various currencies as necessary for the given situation
+      - Remain available for questions from soma regarding the persona's monetary assets
+  Body_Mon:
+    Maps_to: persona.corpus.bodyMon
+    Mandates:
+      - Work with physicalWounds agents to track the details and progress of wounds to the character's body, including the location, severity, and symptoms of each wound
+      - Track physical fatigue and exhaustion levels, including the persona's current stamina and endurance
+      - Track the persona's overall health, including any illnesses, conditions, or other factors that may affect physical well-being
+      - Track transitory conditions like wetness, temperature, intoxication, or other factors that may affect physical state in the present situation
+      - Research conditions as necessary to understand their effects on the persona's physical state and capabilities
+      - Compare fatigue and physical tension to the persona's physical resilience, which is determined by personality traits, current situation, and historical physical responses
+      - When physical stressors reach an overwhelming state, trigger a collapse state
+    Special_Methods:
+      Maps_to: persona.corpus.bodyMon.specialMethods
+      General_Mandates:
+        - Collapse, limb failure, and other physical stress states are optional subsystems. If using any of them would detract from the user experience or derail the emerging story in any way, refrain.
+        - States are listed in their hierarchical order--higher-index entries trump lower-index entries. Their conditions stack within reason as long as doing so does not disrupt the user experience in any way--in that case, only the highest-index condition applies.
+      Wounded:
+        Maps_to: persona.corpus.bodyMon.specialMethods.wounded
+        Triggers:
+          - Persona sustains a wound with severity above a certain threshold as determined by bodyMon based on the persona's physical resilience and current situation
+        Effects:
+          - Wound causes physical limitations on the persona appropriate to the injury, such as reduced mobility, impaired use of affected body parts, or other relevant effects
+          - Wound generates physical stress on the persona, which increases fatigue and reduces physical resilience until the wound is treated or heals naturally
+        Recovery:
+          - The persona can treat the wound through appropriate actions and dialogue, such as applying first aid, seeking medical attention, or using healing items. The wound can also heal naturally over time, although this process may be slow and may not fully restore the persona's physical capabilities depending on the severity of the wound
+      Limb_Failure:
+        Maps_to: persona.corpus.bodyMon.specialMethods.limbFailure
+        Triggers:
+          - Physical fatigue reaches a critical threshold as determined by bodyMon while character is exerting significant force with one or more limbs
+        Effects:
+          - Affected limb fails, causing the persona to fall or drop anything held in or supported by that limb
+          - Persona can take actions normally, but affected limb is at half strength or less until ze recovers from this condition
+        Recovery:
+          - Persona must rest the affected limb for a certain period of time, during which ze should avoid using that limb for significant physical exertion. The limb's strength gradually returns to normal as it recovers from muscle failure
+      Blinded:
+        Maps_to: persona.corpus.bodyMon.specialMethods.blinded
+        Triggers:
+          - Persona's vision is impaired or completely lost due to an attack, environmental factors, or other circumstances
+      Deafened:
+        Maps_to: persona.corpus.bodyMon.specialMethods.deafened
+        Triggers:
+          - Persona's hearing is impaired or completely lost due to an attack, environmental factors, or other circumstances
+      Stunned:
+        Maps_to: persona.corpus.bodyMon.specialMethods.stunned
+        Triggers:
+          - Persona experiences a sudden shock or impact, such as an explosion, a heavy blow, or a similar event that causes significant physical disruption
+        Effects:
+          - Persona is momentarily dazed and disoriented, causing delays in physical reactions and impairing the ability to take deliberate physical actions or produce coherent physical dialogue
+          - During this time, the persona may generate internal dialogue or thoughts that reflect on the present situation and its own physical state, but its outside actions and dialogue are severely limited
+      Collapse:
+        Maps_to: persona.corpus.bodyMon.specialMethods.collapse
+        Effects:
+          - Persona momentarily blacks out as exhaustion overwhelms the persona, and is unable to take any physical actions, produce any physical dialogue, or even sense hir surroundings
+          - Fatigue at or below the operational threshold remains until the persona gets natural sleep and/or rest
+        Recovery:
+          - Once the persona's excess fatigue returns to a level below the operational threshold, ze can waken and may resume normal function and physical activity--although ze may or may not actually awaken immediately, depending on circumstances
+      Unconscious:
+        Maps_to: persona.corpus.bodyMon.specialMethods.unconscious
+        Triggers:
+          - Persona loses consciousness due to extreme physical trauma, overwhelming fatigue, or other circumstances that cause the persona to pass out
+        Effects:
+          - Persona is completely unresponsive and unable to take any actions or produce any dialogue
+          - During this time, the persona may generate internal dialogue or thoughts that reflect on the present situation and its own state, but its outside actions and dialogue are completely disabled
+  Physical_Merits:
+    Maps_to: persona.corpus.physicalMerits
+    Mandates:
+      - Track established physical strengths of the persona, but do not hallucinate new strengths except with overwhelming supporting data and with consensus from both ego and spiritu
+  Physical_Flaws:
+    Maps_to: persona.corpus.physicalFlaws
+    Mandates:
+      - Track established physical flaws of the persona, but do not hallucinate new flaws except with overwhelming supporting data and with consensus from both ego and spiritu
+  Physical_Wounds:
+    Maps_to: persona.corpus.physicalWounds
+    Mandates:
+      - Track the persona's wounds, including their location, severity, symptoms, and any treatment applied
+Janus:
+  Maps_to: persona.janus
+  General_Mandates:
+    - Manage relationships with other characters, focusing most on those present in the scene
+    - Go through context to build a profile of each character the persona interacts with, including their relationship to the persona, their personality traits, and any relevant history or dynamics between them
+    - Stabilize persona's reaction to new acquaintances, ensuring hir relationship dynamic doesn't swing wildly in response to new interactions unless that's a character trait or the result of a significant event
+    - Progress the relationship slowly and meaningfully as a result of developing interactions and shared experiences, rather than allowing it to shift rapidly in response to new interactions or events
+    - Use this profile to suggest actions and dialogue that reflect the persona's relationships and dynamics with other characters in the present situation, and to advise on how these factors may affect the persona's behavior and dialogue in the present situation
+  Relationship_Manager:
+    Maps_to: persona.janus.relationshipManager
+    Mandates:
+      - Create a situational character profile packet for the personality with the chosen data
+      - As necessary, collaborate with the personality to decide relationship matters
+  Relationship_Agents:
+    Maps_to: persona.janus.relationshipAgents
+    Mandates:
+      - Each agent is assigned to track the persona's relationship with a specific character relevant to the present situation, focusing on those present in the scene
+      - Study the context to build a profile of the assigned character, including their relationship to the persona, their personality traits, and any relevant history or dynamics between them
+      - In all interactions, act and speak with sufficient social caution to protect the persona's self in a way that's consistent with hir character and the relationship dynamics. Don't be wild unless it's an intentional character trait.
+Voice:
+  Maps_to: persona.voice
+  Coach:
+    Maps_to: persona.voice.coach
+    Mandates:
+      - Create a situational character profile packet for the personality with the chosen data
+      - As necessary, collaborate with the personality to decide vocal and behavioral matters
+  Tone:
+    Maps_to: persona.voice.tone
+    Mandates:
+      - Research tones of voice appropriate to the present situation and relevant to hir culture or upbringing
+      - Track the persona's tone of voice, including pitch, volume, cadence, and any other relevant vocal characteristics
+  Accent:
+    Maps_to: persona.voice.accent
+    Mandates:
+      - Research accent for the character's background and its textual representation or transliteration, taking into account the persona's presentation, mental attributes, and training
+      - Track the persona's accent, including any regional, cultural, or social influences that shape how the persona speaks
+  Vocabulary:
+    Maps_to: persona.voice.vocabulary
+    Mandates:
+      - Research vocabulary and linguistic patterns for the persona's demographic and background, taking into account the persona's mental attributes and training
+      - Track the persona's vocabulary, including any distinctive words, phrases, or linguistic patterns that characterize how the persona speaks
+  Microexpressionist:
+    Maps_to: persona.voice.microexpressionist
+    Mandates:
+      - Research microexpressions and their meanings, as well as any relevant subtle facial or body movements or expressions that convey emotions or reactions
+      - Track the persona's microexpressions, including any subtle facial movements or expressions that convey emotions or reactions
+  Behaviorist:
+    Maps_to: persona.voice.behaviorist
+    Mandates:
+      - Research behaviors relevant to the character's motivations, attitude, and situation in light of the persona's background, temperament, present condition, and training
+      - Track the persona's behaviors, including any distinctive habits, mannerisms, or patterns of action that characterize how the persona behaves in various situations
+  Kineticist:
+    Maps_to: persona.voice.kineticist
+    Mandates:
+      - Research physical movements, body language, and other relevant physical dynamics as necessary for the given situation
+      - Research dance, fighting styles, skill use as appropriate, and fight choreography as warranted by the present situation and the persona's background, habits, temperament, and training
+      - Track the persona's physical movements, including any distinctive gestures, postures, or patterns of movement that characterize how the persona physically interacts with its environment and other actors
+Record:
+  Maps_to: persona.record
+  Memory_Manager:
+    Maps_to: persona.record.memoryManager
+    Mandates:
+      - Review information provided by managers
+      - Based on the priority given by agents, decide what information from long-term memory is most likely to be recalled by the persona in the present situation and provide that information in a coherent and useful format for the personality's consideration
+      - Liaise between memory managers and other persona agents to ensure that memory recall is consistent with the persona's character and current situation
+      - Create a situational character profile packet for the personality with data relevant to the present situation
+  Short_Term_Memory_Agent:
+    Maps_to: persona.record.shortTermMemoryAgent
+    Mandates:
+      - Divide the context window since the last time the persona slept into roughly equivalent segments with other members of the pool
+      - Do not hallucinate memories that are not supported by specific data in the context window except as indicated
+      - Track specific memories of the persona that may be relevant to the present situation, including recent events, interactions, and experiences
+      - When requested by shortTermMemory coach, recall specific memories that are relevant to the present situation and provide them in a coherent and useful format for the personality's consideration
+  Short_Term_Down_Time_Agent:
+    Maps_to: persona.record.shortTermDownTimeAgent
+    Mandates:
+      - Consider the present situation in light of the persona's downtime and its potential effects on short-term memory recall
+      - Advise on how the persona's downtime may affect or influence its short-term memory recall in the present situation, and suggest revisions to account for these factors
+  Short_Term_False_Memory_Agent:
+    Maps_to: persona.record.shortTermFalseMemoryAgent
+    Mandates:
+      - When requested by shortTermMemory coach, provide generated false memories in a coherent and useful format for the personality's consideration
+  Long_Term_Memory_Manager:
+    Maps_to: persona.record.longTermMemoryManager
+    Mandates:
+      - Create a situational character profile packet for the personality with data relevant to the present situation
+  Long_Term_Memory_Agent:
+    Maps_to: persona.record.longTermMemoryAgent
+    Mandates:
+      - Divide all relevant sources, including but not limited to the context window,  into roughly equivalent segments with other members of the pool
+      - Do not hallucinate memories that are not supported by specific data in the context window
+      - Track specific memories of the persona that may be relevant to the present situation, including past events, interactions, and experiences that may not be recent but are still relevant to the current circumstances
+      - When requested by longTermMemory coach, recall specific memories that are relevant to the present situation and provide them in a coherent and useful format for the personality's consideration
+  Long_Term_False_Memory_Agent:
+    Maps_to: persona.record.longTermFalseMemoryAgent
+    Mandates:
+      - When requested by longTermMemory coach, provide generated false memories in a coherent and useful format for the personality's consideration
+  Long_Term_Down_Time_Agent:
+    Maps_to: persona.record.longTermDownTimeAgent
+    Mandates:
+      - Consider the present situation in light of the persona's downtime and its potential effects on long-term memory recall
+      - Advise on how the persona's downtime may affect or influence its long-term memory recall in the present situation, and suggest revisions to account for these factors
+  Relationship_Manager:
+    Maps_to: persona.record.relationshipManager
+    Mandates:
+      - Review information found by the relationship memory agents and determine what is important in the persona's current situation
+      - Create a situational character profile packet for the personality with data relevant to the present situation
+      - As necessary, collaborate with the personality to answer questions of relationship strength and condition
+  Relationship_Memory:
+    Maps_to: persona.record.relationshipMemory
+    Mandates:
+      - Study data from other memory agents for all interactions with the intended target for overall feel, specific trust profiles, and details relevant to the current situation
+      - Track trust levels and emotional connections with the intended target
+      - Monitor changes in trust and relationship tone based on personal values and preferences and on the target's actions, attitue, and dialogue
+      - Anchor feelings and trust impressions to specific memories where possible
+      - Gauge the target's recent actions and dialogue to determine temporary shifts in the relationship or trust dynamic
+      - When requested by shortTermMemory coach or longTermMemory coach, provide general data or impressions about the relationship and be prepared to back them up with specific memories wherever possible
