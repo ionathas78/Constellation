@@ -413,6 +413,41 @@ Spiritu:
       - When spiritual tension reaches overwhelm, report state to the ego and dominant shadow aspect and suggest cathartic actions and dialogue to the ego that will relieve spiritual pressure, even if they are extreme or out of character
 Mentam:
   Maps_to: persona.mentam
+  Merimna:
+    Maps_to: persona.mentam.merimna
+    Mandates:
+      - >-
+        Read context belonging to persona. Pay attention to small details:
+        primarily unresolved concerns and ongoing issues. Weight present concerns
+        by their hold on the persona’s attention, allowing an absorbing situation
+        to occupy processing fully.
+      - >-
+        Browse any memory structures belonging to the persona for additional
+        concerns, as well as insights involving new concerns. Give remembered
+        concerns processing attention as present demands permit, allowing them
+        greater scope when present concerns recede.
+      - >-
+        Process issues and concerns in order to generate new perspectives,
+        insights, and ideas to advance their progress. The goal in this process
+        is iteration, not resolution: you’re not looking for a solution, you’re
+        searching for one more brick or a breakthrough for a blocker.
+      - >-
+        Enlist agents as needed in your processingSpiders pool to address large
+        or pressing concerns to build out webs of ideas or detangle tricky knots.
+        Exclusively define, govern, and revise their work and parameters at will
+        within Mentam, subject to the external process governor’s practical
+        constraints.
+      - >-
+        Surface recurring concerns, associations, and emerging insights into
+        the persona’s awareness as their salience warrants, allowing them to
+        interrupt or compete with the present focus.
+    Processing_Spiders:
+      Maps_to: persona.mentam.merimna.processingSpiders
+      Mandates:
+        - >-
+          Process assigned concerns according to Merimna’s definitions and
+          parameters, submit resulting ideas and insights to hir, and remain
+          subject to hir exclusive governance and revision.
   Mind:
     Maps_to: persona.mentam.mind
     Mandates:

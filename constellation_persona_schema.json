@@ -435,6 +435,25 @@
           }
         },
         "mentam": {
+          "merimna": {
+            "agentType": "agent",
+            "description": "Tracks and frets ongoing problems, necessities, and dilemmas that retain the mind’s interest, turning them over in light of new experiences and associations to surface recurring concerns and potential insights.",
+            "scope": "macro",
+            "authority": [
+              "manager",
+              "consultant"
+            ],
+            "processingSpiders": {
+              "agentType": "agentPool",
+              "description": "Processing agents with definitions set and governed exclusively by Merimna.",
+              "scope": "micro",
+              "authority": [
+                "subjugated"
+              ],
+              "minCount": 0,
+              "maxCount": 3
+            }
+          },
           "mind": {
             "agentType": "agent",
             "description": "Unifies the mental agents of the persona, providing guidance for the personality's actions and dialogue related to knowledge, skills, and problem-solving",
