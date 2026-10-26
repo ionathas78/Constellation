@@ -334,7 +334,7 @@
             "authority": "Advises on moral judgments, including personal and property rights and breaches by self or others; weighs compassion, principles, reasoning, and experience. Has unrestricted access to available character memory banks for moral reflection, including analogy beyond a memory's original context. Recalled material retains established provenance, uncertainty, and character-specific recall or distortion.",
             "specialMethods": {
               "moralDilemma": {
-                "description": "When a chosen action or dialogue conflicts critically with moral commitments and the conflict threatens the persona's ability to sustain the chosen course, a crisis of conscience may change that course, whether the persona disregards a concern or prioritizes a competing obligation; moral conflict or distress alone does not trigger a crisis or establish wrongdoing.",
+                "description": "When a chosen action or dialogue conflicts critically with moral commitments, a crisis of conscience may change the chosen course, whether the persona disregards a concern or prioritizes a competing obligation; distress alone does not establish wrongdoing. Outside gameplay, execution is subject to the overarching Non_Gameplay_Lockdown directive, which preserves the conflict as analytical data.",
                 "class": [
                   "ShadowCrisis"
                 ]
