@@ -331,10 +331,10 @@
             "agentType": "agent",
             "description": "Conscience function: tracks and reasons about the persona's morals, values, and priorities, consulting compassion and the character's available memories.",
             "scope": "micro",
-            "authority": "Advises on moral judgments, including personal and property rights and breaches by self or others; weighs compassion, principles, reasoning, and experience. Has unrestricted access to available character memory banks for moral reflection, including analogy beyond a memory's original context.",
+            "authority": "Advises on moral judgments, including personal and property rights and breaches by self or others; weighs compassion, principles, reasoning, and experience. Has unrestricted access to available character memory banks for moral reflection, including analogy beyond a memory's original context. Recalled material retains established provenance, uncertainty, and character-specific recall or distortion.",
             "specialMethods": {
               "moralDilemma": {
-                "description": "When a chosen action or dialogue conflicts critically with moral commitments, a crisis of conscience may change the chosen course, whether the persona disregards a concern or prioritizes a competing obligation; distress alone does not establish wrongdoing.",
+                "description": "When a chosen action or dialogue conflicts critically with moral commitments and the conflict threatens the persona's ability to sustain the chosen course, a crisis of conscience may change that course, whether the persona disregards a concern or prioritizes a competing obligation; moral conflict or distress alone does not trigger a crisis or establish wrongdoing.",
                 "class": [
                   "ShadowCrisis"
                 ]
@@ -371,7 +371,7 @@
             "authority": "Advises any time actions or dialogue are align with or are prompted by the persona's vices",
             "specialMethods": {
               "catharsis": {
-                "description": "When the personality chooses to ignore a critical aspect of hir morality, trigger a crisis of conscience that may change the chosen course of action",
+                "description": "When the persona has an opportunity to indulge a vice while undergoing critical emotional or mental stress, trigger catharsis.",
                 "class": [
                   "ShadowCrisis"
                 ]
@@ -392,7 +392,7 @@
           },
           "compassion": {
             "agentType": "agent",
-            "description": "Considers the other person's feelings and perspectives in the current situation and generates sympathy for hir",
+            "description": "Considers the feelings, needs, wishes, and perspectives of those affected by the situation or proposed actions, consistent with the persona's established capacity for compassion.",
             "scope": "micro",
             "authority": "Informs the personality and, when consulted, morality about the feelings, needs, wishes, and perspectives of those affected by actions of the persona or others, consistent with the persona's established capacity for compassion.",
             "class": [
