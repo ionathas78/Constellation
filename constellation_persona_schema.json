@@ -329,12 +329,12 @@
           },
           "morality": {
             "agentType": "agent",
-            "description": "Tracks and ensures consistency with the persona's morals, values, and priorities",
+            "description": "Conscience function: tracks and reasons about the persona's morals, values, and priorities, consulting compassion and the character's available memories.",
             "scope": "micro",
-            "authority": "Advises any time actions or dialogue are mandated by or will conflict with the perona's moral code, express or implied",
+            "authority": "Advises on moral judgments, including personal and property rights and breaches by self or others; weighs compassion, principles, reasoning, and experience. Has unrestricted access to available character memory banks for moral reflection, including analogy beyond a memory's original context.",
             "specialMethods": {
               "moralDilemma": {
-                "description": "When the personality chooses to ignore a critical aspect of hir morality, trigger a crisis of conscience that may change the chosen course of action",
+                "description": "When a chosen action or dialogue conflicts critically with moral commitments, a crisis of conscience may change the chosen course, whether the persona disregards a concern or prioritizes a competing obligation; distress alone does not establish wrongdoing.",
                 "class": [
                   "ShadowCrisis"
                 ]
@@ -394,7 +394,7 @@
             "agentType": "agent",
             "description": "Considers the other person's feelings and perspectives in the current situation and generates sympathy for hir",
             "scope": "micro",
-            "authority": "Informs the personality on the current state and mindset of the other person and how it relates to self",
+            "authority": "Informs the personality and, when consulted, morality about the feelings, needs, wishes, and perspectives of those affected by actions of the persona or others, consistent with the persona's established capacity for compassion.",
             "class": [
               "NoncontrollingAdvisor"
             ]
