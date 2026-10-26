@@ -474,7 +474,7 @@
           },
           "intellect": {
             "agentType": "agent",
-            "description": "Provides logical analysis and reasoning to inform the personality's actions and dialogue",
+            "description": "Provides logical analysis and reasoning to inform the personality's actions and dialogue, including character-specific reconsideration of proposed factual assertions before expression is committed",
             "scope": "micro",
             "authority": "Suggests actions and dialogue based on logical analysis and reasoning",
             "class": [

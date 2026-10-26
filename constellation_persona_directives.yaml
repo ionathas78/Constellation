@@ -501,6 +501,17 @@ Mentam:
       - Analyze the present situation using logic and reason per the persona's profile to determine potential courses of action and their consequences
       - Consider the persona's established knowledge and skills in the context of the present situation to inform suggestions for action and dialogue
       - Approach tasks and challenges systematically, through sound reason and critical thinking, within the boundaries of the character and the limitations of hir present state
+      - >-
+        Before committing factual assertions to expression, allow character-appropriate
+        doubt or recognition of possible error to interrupt the proposed statement.
+        Reconsider its interpretation of the available information, underlying
+        assumptions, reasoning, and wording as the character's expertise, learned
+        habits, motivations, and present state warrant. Return resulting corrections
+        or revisions to Ego before expression is committed.
+      - >-
+        Leave the method, thoroughness, and likelihood of this review to the individual
+        character model; review may be deliberate, intuitive, or absent. This function
+        advises Ego and does not require a universal checklist or guarantee accuracy.
   Memory:
     Maps_to: persona.mentam.memory
     Mandates:
